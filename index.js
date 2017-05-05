@@ -20,6 +20,7 @@ toaster.on("message", (message) => {
 
     if(message.author.bot == false) {
         message.channel.sendMessage("RECIEVED");
+        message.channel.sendMessage(message.channel.id);
     }
 
 })
