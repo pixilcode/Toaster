@@ -7,10 +7,10 @@ console.log("Working...");
 //Tell the toaster what to do
 toaster.on("message", (message) => {
 
-    if(message.content.toUpperCase() == "PING") message.channel.sendMessage("PONG");
-    
-    message.reply("hello!");
-    message.channel.sendMessage("PING");
+    if(message.channel == "pingpong" && message.content == "Go Ahead 7719") {
+        message.channel.sendMessage("PONG");
+        message.channel.sendMessage("PING");
+    };
 
 })
 
