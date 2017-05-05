@@ -3,14 +3,20 @@ const Discord = require("discord.js");
 const toaster = new Discord.Client();
 
 console.log("Working...");
+var play = false;
 
 //Tell the toaster what to do
 toaster.on("message", (message) => {
 
-    if(message.channel == "pingpong" && message.content == "Go Ahead 7719") {
-        message.channel.sendMessage("PONG");
+    if((message.channel == "pingpong" && message.content == "Go Ahead 7719") || play) {
+        play = true;
         message.channel.sendMessage("PING");
+        message.channel.sendMessage("PONG");
     };
+
+    if(message.content.toUpperCase() == "STOP") {
+        play = false;
+    }
 
 })
 
