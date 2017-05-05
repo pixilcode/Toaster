@@ -8,7 +8,7 @@ var play = false;
 //Tell the toaster what to do
 toaster.on("message", (message) => {
 
-    if((message.channel == "pingpong" && message.content == "Go Ahead 7719") || play) {
+    if((message.channel.id == "pingpong" && message.content == "Go Ahead 7719") || play) {
         play = true;
         message.channel.sendMessage("PING");
         message.channel.sendMessage("PONG");
