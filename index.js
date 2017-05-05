@@ -18,6 +18,10 @@ toaster.on("message", (message) => {
         play = false;
     }
 
+    if(message.author.bot == false) {
+        message.channel.sendMessage("RECIEVED");
+    }
+
 })
 
 //Log in Toaster
