@@ -13,15 +13,15 @@ toaster.on("message", function(message) {
     if(message.channel.id == "309908769163313152") {
 
         //If the phrase is right, start the game
-        if(message.content.toUpperCase() == begin + "GO") {
+        if(message.content == begin + "GO") {
             message.delete(0);
             play = true;
         }
 
         //If the phrase is "STOP", stop the game
-        if(message.content.toUpperCase() == begin + "STOP") {
+        if(message.content == begin + "STOP") {
             message.delete(0);
-            message.channel.sendMessage("STOPPING");
+            message.channel.sendMessage(":octagonal_sign: STOPPING :octagonal_sign:");
             play = false;
         }
 
