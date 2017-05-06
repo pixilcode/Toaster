@@ -8,19 +8,18 @@ var play = false;
 //Tell the toaster what to do
 toaster.on("message", (message) => {
 
-    if((message.channel.id == "pingpong" && message.content == "Go Ahead 7719") || play) {
+    if((message.channel.id == "309908769163313152" && message.content == "Go Ahead 7719") || play) {
+        
+        if(message.content == "Go Ahead 7719") message.delete(0);
+        
         play = true;
-        message.channel.sendMessage("PING");
-        message.channel.sendMessage("PONG");
+        message.channel.sendMessage("PING :ping_pong:");
+        message.channel.sendMessage("PONG :ping_pong:");
     };
 
     if(message.content.toUpperCase() == "STOP") {
+        message.delete(0);
         play = false;
-    }
-
-    if(message.author.bot == false) {
-        message.channel.sendMessage("RECIEVED");
-        message.channel.sendMessage(message.channel.id);
     }
 
 })
