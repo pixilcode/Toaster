@@ -43,6 +43,14 @@ const toaster = new Discord.Client();
 //Constants
 const begin = "~";
 const options = ["ROCK", "PAPER", "SCISSORS"];
+const comparisons = {
+    "ROCK" : "PAPER",
+    "PAPER" : "SCISSORS",
+    "SCISSORS" : "ROCK"
+}
+
+comparisons["ROCK"];
+
 const commands = [[begin + "hello", "Say hello"], [begin + "go", "Start the game of ping-pong"], [begin + "stop", "Stop the game of ping-pong"], [begin + "roll [#]", "Roll a [#]-sided die"]];
 
 //Variables
@@ -92,7 +100,7 @@ toaster.on("message", function(message) {
             var player = args[1];
             if(isValidChoice(player, choices)) {
                 var computer = getRPSMove();
-                var winner = compare(player, computer);
+                var winner = getWinner(player, computer);
 
                 //Get username of winner
                 var username = "";
@@ -103,7 +111,7 @@ toaster.on("message", function(message) {
                 }
 
                 message.channel.sendMessage(computer);
-                message.channel.sendMessage("The winner is " + winner);
+                message.channel.sendMessage("The winner is " + username);
             }
         }
 
