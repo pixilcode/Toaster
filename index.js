@@ -1,21 +1,52 @@
 //Declare functions
 function isCommand(str, message) {
+    
+    //If the message comes from a bot, don't count it
     if(message.author.bot) {
         return false;
     } else {
+        //Tell whether the command is the one asked for
         return message.content.startsWith(begin + str);
     }
+
+}
+
+function isValidChoice(choice, choiceList) {
+    
+    //Cycle through each choice
+    for(var i = 0; i < choiceList.length; i++) {
+        
+        //If the choice is in choiceList, return true
+        if(choice == choiceList[i]) {
+            return true;
+        }
+    }
+
+    return false;
+
+}
+
+function getRPSMove() {
+    
+    //Get a random number
+    var optionNum = Math.floor(Math.random() * 3);
+    
+    //Get the coresponding option
+    return options[optionNum];
+
 }
 
 //Set up Discord and Toaster (the bot)
 const Discord = require("discord.js");
 const toaster = new Discord.Client();
 
-var play = false;
-
+//Constants
 const begin = "~";
-
+const options = ["ROCK", "PAPER", "SCISSORS"];
 const commands = [[begin + "hello", "Say hello"], [begin + "go", "Start the game of ping-pong"], [begin + "stop", "Stop the game of ping-pong"], [begin + "roll [#]", "Roll a [#]-sided die"]];
+
+//Variables
+var play = false;
 
 toaster.on("ready", function() {
     console.log("Working...");
@@ -45,6 +76,7 @@ toaster.on("message", function(message) {
             message.channel.sendMessage("PING :ping_pong:");
             message.channel.sendMessage("PONG :ping_pong:");
         }
+
     //#general channel
     } else if(message.channel.name == "general") {
 
@@ -56,9 +88,23 @@ toaster.on("message", function(message) {
     //#games
     } else if(message.channel.name == "games") {
         
-        //If the phrase is "hi", respond
-        if(isCommand("hi", message)) {
-            message.channel.sendMessage("HI!");
+        if(isCommand("rps", message)) {
+            var player = args[1];
+            if(isValidChoice(player, choices)) {
+                var computer = getRPSMove();
+                var winner = compare(player, computer);
+
+                //Get username of winner
+                var username = "";
+                if(winner == "PLAYER") {
+                    username = message.author.username;
+                } else {
+                    username = "Toaster";
+                }
+
+                message.channel.sendMessage(computer);
+                message.channel.sendMessage("The winner is " + winner);
+            }
         }
 
     }
